@@ -31,8 +31,12 @@ Par exemple, si on a le couple (x,y1)(x,y2) alors le point suivant sera (x1,y2)
 \paragraph{Question 3}
 Ça correspond à la ligne de toit de la figure B.
 \paragraph{Question 4}
-On distingue 3 phases : \newline
-
+On distingue 4 phases : \newline
+La premiere phase conciste à remplir le tableau elle a une complexité de $O(x*y)$ avec $x,y$ la taille en abscisse et ordonnée du tableau.\newline
+La deuxieme phase conciste à chercher le début de la ligne de toit qui a une complexité de $O(x)$ on commence en $(0,0)$ et 
+on parcours le tableau en incrémentant les abscisse jusqu'à tomber sur une case avec la valeur $True$.
+La troisieme phase : on cherche a monter toujours plus haut dans la ligne de toit, si on ne peut pas monter on va a droite, 
+enfin si on ne peut pas aller à droite on rentre dans la 4e phase.
 
 
 
