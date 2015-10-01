@@ -37,7 +37,8 @@ La deuxieme phase conciste à chercher le début de la ligne de toit qui a une c
 on parcours le tableau en incrémentant les abscisse jusqu'à tomber sur une case avec la valeur $True$.
 La troisieme phase : on cherche a monter toujours plus haut dans la ligne de toit, si on ne peut pas monter on va a droite, 
 enfin si on ne peut pas aller à droite on rentre dans la 4e phase.
-
+La 4e phase on verifie a chaque tour si on peut aller a droite, si on ne peut pas on descend, si on peut on retourne dans la phase 3.
+Donc la complexité des phases 3 et 4 dépendant de $n$ la longueur de la ligne de toit en $O(n)$.
 
 
 \end{document}
