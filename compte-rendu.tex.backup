@@ -22,20 +22,27 @@
 \paragraph{Question 1}
 La premiere polyligne ne représente pas une ligne de toit puisqu'elle possède une ligne en diagonale.\newline
 La seconde polyligne est bien une ligne de toit.\newline
-La troisieme incorrecte.\newline
-La quatrieme incorrecte.\newline
+La troisieme n'est pas une ligne de toit.\newline
+La quatrieme n'est pas une ligne de toit.\newline
 \paragraph{Question 2}
 La condition pour qu'une polyligne soit une ligne de toit, deux couples consecutifs doivent avoir un x ou un y en commun.
 L'idée est d'alterner l'égalité entre les x et les y.
-Par exemple, si on a le couple (x,y1)(x,y2) alors le point suivant sera (x1,y2) 
+Par exemple, si on a le couple (x,y1)(x,y2) alors le point suivant sera (x1,y2). 
 \paragraph{Question 3}
-Ça correspond à la ligne de toit de la figure B.
+Il correspond à la ligne de toit de la figure B.
 \paragraph{Question 4}
 On distingue 4 phases : \newline
-La premiere phase conciste à remplir le tableau elle a une complexité de $O(x*y)$ avec $x,y$ la taille en abscisse et ordonnée du tableau.\newline
-La deuxieme phase conciste à chercher le début de la ligne de toit qui a une complexité de $O(x)$ on commence en $(0,0)$ et 
-on parcours le tableau en incrémentant les abscisse jusqu'à tomber sur une case avec la valeur $True$.
-La troisieme phase : on cherche a monter toujours plus haut dans la ligne de toit, si on ne peut pas monter on va a droite, enfin si on ne peut pas aller à droite on rentre dans la 4e phase.
+La première phase consiste à remplir le tableau. Elle a une complexité de $O(x*y)$ avec $x,y$ la taille en abscisse et en ordonnée du tableau respectivement.\newline
+La deuxième phase consiste à chercher le début de la ligne de toit. Elle a une complexité de $O(x)$ on commence en $(0,0)$ et 
+on parcourt le tableau horizontalement en incrémentant les abscisse jusqu'à tomber sur une case avec la valeur $True$.\newline
+La troisième phase consiste à se déplacer dans le tableau vers le haut ou vers la droite. Par défaut, on se déplace vers le haut jusqu'à que la case suivante aie la valeur $False$, 
+auquel cas on commence à se déplacer vers la droite, et, de façon similaire, jusqu'à que la case suivante aie la valeur $False$. 
+Dans ce cas, soit la case supérieure a également la valeur $False$, auquel cas on passe à la quatrième phase, soit elle a la valeur $True$, auquel cas on reprend la troisième phase.\newline
+La quatrième phase consiste à se déplacer dans le tableau vers le bas, jusqu'à que la case suivante aie une valeur de $False$, auquel cas on reprend la troisième phase.\newline
+L'algorithme se termine lorsque on a parcouru tout le tableau horizontalement.\newline
+Donc la complexité des phases 3 et 4 dépendant de $n$ la longueur de la ligne de toit en $O(n)$.
+En conclusion si on compte le remplissage de tableau la complexité se fait en $O(x*y + x + n)$.
+\paragraph{Question 5}
 
 
 
