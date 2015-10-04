@@ -29,7 +29,8 @@ def fusion(Liste1,Liste2):
         if(Liste1[x1][0] < Liste2[x2][0]) :
             #on selectionne l'element de Liste1[x1]
             if hauteur2 > Liste1[x1][1] :
-
+                res.append( (Liste1[x1][0], hauteur2) )
+                x1++
             else :
                 res.append(Liste1[x1])
                 hauteur1 = Liste1[x1][1]
@@ -37,9 +38,11 @@ def fusion(Liste1,Liste2):
         else :
             #on selectionne l'element Liste2[x2]
             if hauteur1 > Liste2[x2][1] :
-
+                res.append( (Liste2[x2][0], hauteur1) )
+                x2++
             else :
                 res.append(Liste2[x2])
                 hauteur2 = Liste2[x2][1]
                 x2++
+    #A partir d'ici on a probablement une des deux liste qui n'a pas été entièrement parcourue
 
