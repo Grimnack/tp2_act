@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from random import * 
 '''
 Tp diviser pour regner de Matthieu Caron et Armand Bour
 '''
@@ -79,7 +80,7 @@ def fusion(Liste1,Liste2):
 
 # print fusion(L1,L2)
 
-def creationLigne (ListeBatiments,debut,fin) :
+def creationLigne (listeBatiments,debut,fin) :
     '''
         Premiere version de création de ligne, utilisant la strategie 
         diviser pour regner. 
@@ -89,22 +90,50 @@ def creationLigne (ListeBatiments,debut,fin) :
     #couper le problème en sous problème pour que ce soit plus simple à résoudre
     #Il est simple de créer un ligne de toit à partir d'un seul batiment 
     #mais aussi si on a pas de batiment : ligne vide
-    
-    #if ListeBatiments == [] :
+    #if listeBatiments == [] :
     if debut > fin :
         return []
     elif debut == fin :
-        (a,b,c) = ListeBatiments[debut]
+        (a,b,c) = listeBatiments[debut]
         return [(a,b),(c,0)] 
     else :
         m = (debut + fin + 1) / 2 
-        return fusion(creationLigne(ListeBatiments,debut,m-1),  creationLigne(ListeBatiments,m,fin))
+        return fusion(creationLigne(listeBatiments,debut,m-1),  creationLigne(listeBatiments,m,fin))
 
-#script de test
-ListeBatiments = [(1,11,5),(3,13,9),(3,6,7),(12,7,16),(16,3,25),(19,18,22)]
-
-print ListeBatiments
-print creationLigne(ListeBatiments,0,len(ListeBatiments)-1)
-
+# #script de test
+# listeBatiments = [(1,11,5),(3,13,9),(3,6,7),(12,7,16),(16,3,25),(19,18,22)]
+# print listeBatiments
+# print creationLigne(listeBatiments,0,len(listeBatiments)-1)
 
 
+def randomBatiment(maxLong,maxHaut) :
+    c = randint(0,maxLong)
+    b = randint(1,maxHaut)
+    a = randint(0,c)
+    return (a,b,c)
+
+def generateRandomListBuilding(maxLong,maxHaut,nbBuilding) :
+    res = []
+    for i in xrange(0,nbBuilding):
+        res.append(randomBatiment(maxLong,maxHaut))
+    return res
+
+
+# listeBatimentsAlea100 = generateRandomListBuilding(1000,1000,100)
+# print listeBatimentsAlea100
+# print creationLigne(listeBatimentsAlea100,0,99)
+
+def generateString(ligneToits) :
+    chaine = ""
+    for (a,b) in ligneToits :
+        chaine = chaine + a + "," + b + " "
+    return chaine
+
+
+def generateSVG(ligneToits,filename) :
+    chaine = """<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="-10 -150 200 150">\n"""
+        + """<polyline points=" """
+        + generateString(ligneToits)
+        +""" "stroke="blue" stroke-width="1" fill="none" transform="scale(5,-5)"/></svg>"""
+    open(filename,w)
+     
