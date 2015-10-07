@@ -2,6 +2,8 @@
 %\documentclass[a4paper,10pt]{scrartcl}
 
 \usepackage[utf8]{inputenc}
+\usepackage{listings}
+
 
 \title{TP2 ACT}
 \author{Matthieu Caron et Armand Bour}
@@ -31,25 +33,40 @@ Par exemple, si on a le couple (x,y1)(x,y2) alors le point suivant sera (x1,y2).
 \paragraph{Question 3}
 Il correspond à la ligne de toit de la figure B.
 \paragraph{Question 4}
-\textbf{Avant tout :} $n$ est le nombre d'immeuble $x$ la plus grande abscisse est donc la largeur du tableau et $y$ la hauteur du tableau\newline
-On distingue 4 phases : \newline
-La première phase consiste à créer et remplir le tableau :\newline
-Dans cette première phase on dispose de notre liste de batiments, un batiment étant un triplet $(debut, hauteur, fin)$\newline
-Il nous faut d'abord trouver l'abscisse et la hauteur maximum pour créer notre tableau de booléen donc on fait un parcours de la liste en $O(n)$. 
-Ensuite il nous créer notre tableau 2D de $False$ on a donc une complexité en $O(x*y)$. 
-La deuxième phase consiste à chercher le début de la ligne de toit. Elle a une complexité de $O(x)$ on commence en $(0,0)$ et 
+\textbf{Avant tout :} $n$ est le nombre d'immeuble $x$ la plus grande abscisse est donc la largeur du tableau et $y$ la hauteur du tableau\newline \newline
+\textbf{On distingue 4 phases :} \newline \newline
+\textbf{La première phase} consiste à créer et remplir le tableau :\newline
+Dans cette première phase on dispose de notre liste de bâtiments, un bâtiment étant un triplet $(debut, hauteur, fin)$\newline
+Il nous faut d'abord trouver l'abscisse et la hauteur maximum pour créer notre tableau de booléen. On fait alors un parcours de la liste en $O(n)$. 
+Ensuite, on crée notre tableau 2D de $False$ on a donc une complexité en $O(x*y)$.
+Enfin \emph{rajouter nos bâtiments, ce qui nous coûte le plus} en terme de complexité.
+Quel est notre pire cas ? On a nos batiments qui sont tous de hauteur maximum et de largeur maximum la complexité sera donc de $O(n*x*y)$.\newline
+\textbf{La deuxième phase} consiste à chercher le début de la ligne de toit. Elle a une complexité de $O(x)$. On commence en $(0,0)$ et 
 on parcourt le tableau horizontalement en incrémentant les abscisse jusqu'à tomber sur une case avec la valeur $True$.\newline
-La troisième phase consiste à se déplacer dans le tableau vers le haut ou vers la droite. Par défaut, on se déplace vers le haut jusqu'à que la case suivante aie la valeur $False$, 
+\textbf{La troisième phase} consiste à se déplacer dans le tableau vers le haut ou vers la droite. Par défaut, on se déplace vers le haut jusqu'à que la case suivante aie la valeur $False$, 
 auquel cas on commence à se déplacer vers la droite, et, de façon similaire, jusqu'à que la case suivante aie la valeur $False$. 
 Dans ce cas, soit la case supérieure a également la valeur $False$, auquel cas on passe à la quatrième phase, soit elle a la valeur $True$, auquel cas on reprend la troisième phase.\newline
-La quatrième phase consiste à se déplacer dans le tableau vers le bas, jusqu'à que la case suivante aie une valeur de $False$, auquel cas on reprend la troisième phase.\newline
+\textbf{La quatrième phase} consiste à se déplacer dans le tableau vers le bas, jusqu'à que la case suivante aie une valeur de $False$, auquel cas on reprend la troisième phase.\newline
 L'algorithme se termine lorsque on a parcouru tout le tableau horizontalement.\newline
-Donc la complexité des phases 3 et 4 dépendant de $n$ la longueur de la ligne de toit en $O(n)$.
+Par conséquent, la complexité des phases 3 et 4 est de $O(n)$ (avec $n$ la longueur de la ligne de toit).
 En conclusion si on compte le remplissage de tableau la complexité se fait en $O(x*y + x + n)$.
 \paragraph{Question 5}
-Dans ce nouvel algorithme on doit compter la complexité de l'ajout d'immeuble pour ensuite recalculer la ligne de toit.
-Pour ajouter un batiment on peut considerer qu'on place simplement les deux points du batiment sur notre graphique. 
-On a donc une complexité en $O(2)$
+Dans ce nouvel algorithme, il n'y a plus de remplissage de tableau. On possède notre ligne de toit (initialement vide) et notre liste de batiments.
+On ajoute a chaque tout un batiments à la ligne de toit. On a donc imaginé une fonction qui pour un batiment retourne un ligne de toit, donc en temps constant.
 
+\begin{lstlisting}
+def retourneListeToit(batiment):
+  (a,b,c) = batiment
+  return [(a,b),(c,0)] 
+\end{lstlisting}
+
+La fonction du dessus se fait donc en $O(1)$
+
+\paragraph{Question 6 et 7 : explications}
+L'implémentation est faite en python, la fusion se fait en $O(n)$ avec $n$ le nombre de points dans les lignes de toits passées en arguments de la fonction.
+On sait qu'on ne fait pas plus d'étapes car on parcours tout simplement chacune des deux liste une fois. Enfin pour ce qui est de la création de la ligne de toit on va a chaque fois 
+diviser par deux le problème ce qui explique la complexité en $log(n)$ pour en suite fusionner les sous problème. On a donc une complexité totale de $O(n*log(n)$.
+Actuellement notre fonction (création de ligne de toit en fonction d'une liste de batiments passé en argument) n'est pas récursive terminale, ce qui signifie qu'à partir 
+d'une certaine taille de la liste de batiments, la fonction va planter à cause d'un stack overflow. On a conscience de ça mais on a toujours pas trouvé de solution récursive terminale.
 
 \end{document}

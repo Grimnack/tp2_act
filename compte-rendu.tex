@@ -2,6 +2,8 @@
 %\documentclass[a4paper,10pt]{scrartcl}
 
 \usepackage[utf8]{inputenc}
+\usepackage{listings}
+
 
 \title{TP2 ACT}
 \author{Matthieu Caron et Armand Bour}
@@ -49,9 +51,23 @@ L'algorithme se termine lorsque on a parcouru tout le tableau horizontalement.\n
 Par conséquent, la complexité des phases 3 et 4 est de $O(n)$ (avec $n$ la longueur de la ligne de toit).
 En conclusion si on compte le remplissage de tableau la complexité se fait en $O(x*y + x + n)$.
 \paragraph{Question 5}
-Dans ce nouvel algorithme, on doit compter la complexité de l'ajout d'immeuble pour ensuite recalculer la ligne de toit.
-Pour ajouter un bâtiment on peut considerer qu'on place simplement les deux points du bâtiment sur notre graphique. 
-On a donc une complexité en $O(2)$.
+Dans ce nouvel algorithme, il n'y a plus de remplissage de tableau. On possède notre ligne de toit (initialement vide) et notre liste de batiments.
+On ajoute a chaque tout un batiments à la ligne de toit. On a donc imaginé une fonction qui pour un batiment retourne un ligne de toit, donc en temps constant.
 
+\begin{lstlisting}
+def retourneListeToit(batiment):
+  (a,b,c) = batiment
+  return [(a,b),(c,0)] 
+\end{lstlisting}
+
+La fonction du dessus se fait donc en $O(1)$ et du coup pour chaque batiment on fusionne la ligne de toit avec la ligne de toit du batiment,
+donc on fait n fois la fusion qui est en $O(n)$ donc la complexité est en $O(n^2)$
+
+\paragraph{Question 6 et 7 : explications}
+L'implémentation est faite en python, la fusion se fait en $O(n)$ avec $n$ le nombre de points dans les lignes de toits passées en arguments de la fonction.
+On sait qu'on ne fait pas plus d'étapes car on parcours tout simplement chacune des deux liste une fois. Enfin pour ce qui est de la création de la ligne de toit on va a chaque fois 
+diviser par deux le problème ce qui explique la complexité en $log(n)$ pour en suite fusionner les sous problème. On a donc une complexité totale de $O(n*log(n)$.
+Actuellement notre fonction (création de ligne de toit en fonction d'une liste de batiments passé en argument) n'est pas récursive terminale, ce qui signifie qu'à partir 
+d'une certaine taille de la liste de batiments, la fonction va planter à cause d'un stack overflow. On a conscience de ça mais on a toujours pas trouvé de solution récursive terminale.
 
 \end{document}
