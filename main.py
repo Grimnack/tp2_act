@@ -3,8 +3,6 @@
 
 '''
 Tp diviser pour regner de Matthieu Caron et Armand Bour
-
-
 '''
 
 
@@ -72,14 +70,41 @@ def fusion(Liste1,Liste2):
     return res
 
 
+# #script de test
+# L1 = [(1,10),(5,6),(8,0),(10,8),(12,0)]
+# L2 = [(2,12),(7,0),(9,4),(11,2),(14,0)]
+
+# print L1
+# print L2
+
+# print fusion(L1,L2)
+
+def creationLigne (ListeBatiments,debut,fin) :
+    '''
+        Premiere version de création de ligne, utilisant la strategie 
+        diviser pour regner. 
+        Version récursive non terminale
+    '''
+    #l'idée de diviser pour regner
+    #couper le problème en sous problème pour que ce soit plus simple à résoudre
+    #Il est simple de créer un ligne de toit à partir d'un seul batiment 
+    #mais aussi si on a pas de batiment : ligne vide
+    
+    #if ListeBatiments == [] :
+    if debut > fin :
+        return []
+    elif debut == fin :
+        (a,b,c) = ListeBatiments[debut]
+        return [(a,b),(c,0)] 
+    else :
+        m = (debut + fin + 1) / 2 
+        return fusion(creationLigne(ListeBatiments,debut,m-1),  creationLigne(ListeBatiments,m,fin))
+
 #script de test
-L1 = [(1,10),(5,6),(8,0),(10,8),(12,0)]
-L2 = [(2,12),(7,0),(9,4),(11,2),(14,0)]
+ListeBatiments = [(1,11,5),(3,13,9),(3,6,7),(12,7,16),(16,3,25),(19,18,22)]
 
-print L1
-print L2
-
-print fusion(L1,L2)
+print ListeBatiments
+print creationLigne(ListeBatiments,0,len(ListeBatiments)-1)
 
 
 
