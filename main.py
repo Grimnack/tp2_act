@@ -126,14 +126,26 @@ def generateRandomListBuilding(maxLong,maxHaut,nbBuilding) :
 def generateString(ligneToits) :
     chaine = ""
     for (a,b) in ligneToits :
-        chaine = chaine + a + "," + b + " "
+        chaine = chaine + str(a) + "," + str(b) + " "
     return chaine
 
 
-def generateSVG(ligneToits,filename) :
+def svgBatiment(batiment) :
+    (x1,h,x2)=batiment
+    width = x2 - x1
+    return """<rect x =\""""+str(x1)+"""\" y ="0" width =\""""+str(width)+"""\" height=\""""+ str(h) +"""\" transform=" scale(5,-5) " /> \n"""
+
+def generateSVG(listeBatiments,filename) :
+    ligneToits = creationLigne(listeBatiments,0,len(listeBatiments)-1)
     chaine = """<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="-10 -150 200 150">\n"""
-        + """<polyline points=" """
-        + generateString(ligneToits)
-        +""" "stroke="blue" stroke-width="1" fill="none" transform="scale(5,-5)"/></svg>"""
-    open(filename,w)
-     
+    for batiment in listeBatiments :
+        chaine = chaine + svgBatiment(batiment)
+    chaine = chaine + """<polyline points=\""""+ generateString(ligneToits)+""" " stroke="blue" stroke-width="1" fill="none" transform="scale(5,-5)"/></svg>"""
+    fichier = open(filename,'w')
+    fichier.write(chaine)
+    fichier.close()
+
+
+listeBatiments = [(1,11,5),(3,13,9),(3,6,7),(12,7,16),(16,3,25),(19,18,22)]
+
+generateSVG(listeBatiments,"ligne.svg")
