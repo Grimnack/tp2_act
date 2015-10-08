@@ -1,0 +1,19 @@
+/////////////////////////////////////////
+//TP2 ACT Armand Bour et Matthieu Caron//
+//        Diviser pour regner          //
+/////////////////////////////////////////
+
+
+pièces : compte-rendu.pdf main.py
+
+Pour lancer le main dans un terminal:
+python main.py
+
+Va engendrer plusieurs choses: 
+ -création d'un svg qui correspond à l'exemple donné dans le tp 
+    (création à partir des fonctions des questions 6 et 7)
+ -Test avec une liste de batiments aléatoires de taille 100
+    (en mode texte)
+    (mais comme c'est trop chargé, on l'a commenté, à la fin du fichier main.py)
+
+Les Réponses aux questions se trouvent dans le pdf.

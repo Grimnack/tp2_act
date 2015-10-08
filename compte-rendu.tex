@@ -33,7 +33,7 @@ Par exemple, si on a le couple (x,y1)(x,y2) alors le point suivant sera (x1,y2).
 \paragraph{Question 3}
 Il correspond à la ligne de toit de la figure B.
 \paragraph{Question 4}
-\textbf{Avant tout :} $n$ est le nombre d'immeuble $x$ la plus grande abscisse est donc la largeur du tableau et $y$ la hauteur du tableau\newline \newline
+\textbf{Avant tout :} $n$ est le nombre d'immeuble $x$ la plus grande abscisse est donc la largeur du tableau et $y$ la hauteur du tableau et $k$ est le nombre de points dans la ligne de toit\newline \newline
 \textbf{On distingue 4 phases :} \newline \newline
 \textbf{La première phase} consiste à créer et remplir le tableau :\newline
 Dans cette première phase on dispose de notre liste de bâtiments, un bâtiment étant un triplet $(debut, hauteur, fin)$\newline
@@ -48,8 +48,10 @@ auquel cas on commence à se déplacer vers la droite, et, de façon similaire, 
 Dans ce cas, soit la case supérieure a également la valeur $False$, auquel cas on passe à la quatrième phase, soit elle a la valeur $True$, auquel cas on reprend la troisième phase.\newline
 \textbf{La quatrième phase} consiste à se déplacer dans le tableau vers le bas, jusqu'à que la case suivante aie une valeur de $False$, auquel cas on reprend la troisième phase.\newline
 L'algorithme se termine lorsque on a parcouru tout le tableau horizontalement.\newline
-Par conséquent, la complexité des phases 3 et 4 est de $O(n)$ (avec $n$ la longueur de la ligne de toit).
-En conclusion si on compte le remplissage de tableau la complexité se fait en $O(x*y + x + n)$.
+Par conséquent, la complexité des phases 3 et 4 est de $O(k)$ (avec $k$ la longueur de la ligne de toit).
+Dans notre pire des cas la ligne de toit couvre tout le tableau (par exemple un tableau de largeur 2 et de hauteur y remplit de n batiments dont un de hauteur y)
+En conclusion si on compte le remplissage de tableau la complexité se fait en $O(x*y)$.\newline \newline
+La complexité totale de notre algorithme est donc : $$O(n*x*y)$$
 \paragraph{Question 5}
 Dans ce nouvel algorithme, il n'y a plus de remplissage de tableau. On possède notre ligne de toit (initialement vide) et notre liste de batiments.
 On ajoute a chaque tout un batiments à la ligne de toit. On a donc imaginé une fonction qui pour un batiment retourne un ligne de toit, donc en temps constant.

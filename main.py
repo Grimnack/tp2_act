@@ -154,3 +154,12 @@ def generateSVG(listeBatiments,filename) :
 listeBatiments = [(1,11,5),(3,13,9),(3,6,7),(12,7,16),(16,3,25),(19,18,22)]
 
 generateSVG(listeBatiments,"ligne.svg")
+
+'''
+Decomentez pour tester
+'''
+# listeBatimentsAlea100 = generateRandomListBuilding(1000,1000,100)
+# print "Voici la liste de batiments aléatoires de taille 100"
+# print listeBatimentsAlea100
+# print "Voici sa ligne de toits"
+# print creationLigne(listeBatimentsAlea100,0,99)
